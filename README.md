@@ -1,0 +1,2 @@
+# BuranyaBot
+Costlevania discord bot
