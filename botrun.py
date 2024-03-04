@@ -5,6 +5,11 @@ from disnake.ext import commands
 import os, sqlite3
 import transliterate
 
+
+alphabet_eng = ['&', "'",'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ',', '.', ' ', ';', '?', ')', '[', ']', '{', '}', '`', '~']
+alphabet_ru = ['?', 'э', 'ф', 'и', 'с', 'в', 'у', 'а', 'п', 'р', 'ш', 'о', 'л', 'д', 'ь', 'т', 'щ', 'з', 'й', 'к', 'ы', 'е', 'г', 'м', 'ц', 'ч', 'н', 'я', 'б', 'ю', ' ', 'ж', '?', ')', 'х', 'ъ', 'Х', 'Ъ', 'ё', 'Ё']
+string_ru = ''
+
 intents = disnake.Intents.all()
 bot = commands.Bot(command_prefix='!', intents=intents)
 
@@ -29,9 +34,6 @@ async def on_message(message):
         ref_message = message.reference.resolved if message.reference else None
         if ref_message:
             
-            alphabet_eng = ['&', "'",'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ',', '.', ' ', ';', '?', ')', '[', ']', '{', '}', '`', '~']
-            alphabet_ru = ['?', 'э', 'ф', 'и', 'с', 'в', 'у', 'а', 'п', 'р', 'ш', 'о', 'л', 'д', 'ь', 'т', 'щ', 'з', 'й', 'к', 'ы', 'е', 'г', 'м', 'ц', 'ч', 'н', 'я', 'б', 'ю', ' ', 'ж', '?', ')', 'х', 'ъ', 'Х', 'Ъ', 'ё', 'Ё']
-            string_ru = ''
             flag = True
             while(flag):
                 string_eng = ref_message.content
@@ -49,9 +51,7 @@ async def on_message(message):
     # Проверяем, содержит ли сообщение символы латинского алфавита
     if any(char.isalpha() and char.lower() in "abcdefghijklmnopqrstuvwxyz,.'[]" for char in message.content) and '://' not in message.content and '<:' not in message.content:
         # Если есть символы латиницы, транслитерируем текст
-            alphabet_eng = ['&', "'",'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ',', '.', ' ', ';', '?', ')', '[', ']', '{', '}', '`', '~']
-            alphabet_ru = ['?', 'э', 'ф', 'и', 'с', 'в', 'у', 'а', 'п', 'р', 'ш', 'о', 'л', 'д', 'ь', 'т', 'щ', 'з', 'й', 'к', 'ы', 'е', 'г', 'м', 'ц', 'ч', 'н', 'я', 'б', 'ю', ' ', 'ж', '?', ')', 'х', 'ъ', 'Х', 'Ъ', 'ё', 'Ё']
-            string_ru = ''
+            
             flag = True
             while(flag):
                 string_eng = message.content
@@ -107,9 +107,7 @@ async def on_message(message):
 @bot.slash_command(description="перевести транслит на человеческий")
 async def translit(ctx, *, text: str):
     args_str = ''.join(text)
-    alphabet_eng = ['&', "'",'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ',', '.', ' ', ';', '?', ')', '[', ']', '{', '}', '`', '~']
-    alphabet_ru = ['?', 'э', 'ф', 'и', 'с', 'в', 'у', 'а', 'п', 'р', 'ш', 'о', 'л', 'д', 'ь', 'т', 'щ', 'з', 'й', 'к', 'ы', 'е', 'г', 'м', 'ц', 'ч', 'н', 'я', 'б', 'ю', ' ', 'ж', '?', ')', 'х', 'ъ', 'Х', 'Ъ', 'ё', 'Ё']
-    string_ru = ''
+    
     flag = True
     while(flag):
         string_eng = args_str
